@@ -1,0 +1,46 @@
+version: "3.3"
+
+services:
+    orthanc:
+        image: orthancteam/orthanc
+        ports: [8042:8042]
+        environment:
+            - ORTHANC__AWS_S3_STORAGE__BUCKET_NAME=my-sample-bucket
+            - ORTHANC__AWS_S3_STORAGE__REGION=eu-west-1
+            - ORTHANC__AWS_S3_STORAGE__ACCESS_KEY=minio
+            - ORTHANC__AWS_S3_STORAGE__SECRET_KEY=miniopwd
+            - ORTHANC__AWS_S3_STORAGE__ENDPOINT=http://minio:9000/
+            - ORTHANC__AWS_S3_STORAGE__VIRTUAL_ADDRESSING=false
+            - ORTHANC__AWS_S3_STORAGE__HYBRID_MODE=WriteToObjectStorage
+            - ORTHANC__AUTHENTICATION_ENABLED=false
+            - ORTHANC__DICOM_SERVER_ENABLED=false
+            - ORTHANC_WEB_VIEWER_PLUGIN_ENABLED=true
+            - OHIF_PLUGIN_ENABLED=true
+            - ORTHANC__REMOTE_ACCESS_ALLOWED=true
+            - ORTHANC__AUTHENTICTION_ENABLED=true
+            - VERBOSE_ENABLED=true
+            - VERBOSE_STARTUP=true
+            ORTHANC__REGISTERED_USERS: |
+              {
+                "bhg": "bhg123"
+              }
+        volumes:
+            - orthanc-sqlite-storage:/var/lib/orthanc/db
+
+    minio:
+        command: server /data --console-address ":9001"
+        image: minio/minio
+        ports: [9000:9000, 9001:9001]
+        environment:
+            - MINIO_REGION=eu-west-1
+            - MINIO_ROOT_USER=minio
+            - MINIO_ROOT_PASSWORD=miniopwd
+        volumes:
+            - minio-storage:/data
+volumes:
+    minio-storage:
+    orthanc-sqlite-storage:
+networks:
+    test:
+
+
