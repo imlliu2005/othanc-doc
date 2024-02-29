@@ -11,4 +11,8 @@
 - echo "8" > /etc/yum/vars/centos_version
 - sudo sed -i 's/$releasever/$centos_version/g' /etc/yum.repos.d/docker-ce.repo
 - sudo sed -i 's/$releasever/$centos_version/g' /etc/yum.repos.d/CentOS-Base.repo
-- sudo yum makecache
+- yum makecache
+
+- https://cloud.tencent.com/developer/article/2353414
+- https://www.cnblogs.com/pxyblog/p/17704776.html
+- http://www.mfbz.cn/a/93149.html
