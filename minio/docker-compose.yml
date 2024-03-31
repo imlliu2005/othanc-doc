@@ -20,10 +20,6 @@ services:
             - ORTHANC__AUTHENTICTION_ENABLED=true
             - VERBOSE_ENABLED=true
             - VERBOSE_STARTUP=true
-            ORTHANC__REGISTERED_USERS: |
-              {
-                "bhg": "bhg123"
-              }
         volumes:
             - orthanc-sqlite-storage:/var/lib/orthanc/db
 
