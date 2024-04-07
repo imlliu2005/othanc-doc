@@ -94,3 +94,15 @@ ninja
 
 cmake ../../orthanc-ohif -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
 make
+
+### build orthanc-volview 
+cp dist to /orthanc-volview/Volview/
+
+cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
+make
+
+
+### build volview (node 19.7.0 for node-gpy)(v4.1.1)
+patch -p1 < /source/VolView-$1.patch
+npm install
+npm run build
