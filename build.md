@@ -98,8 +98,13 @@ make
 ### build orthanc-volview 
 cp dist to /orthanc-volview/Volview/
 
+###### linux
 cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
 make
+
+###### windows
+cmake .. -GNinja -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
+ninja
 
 
 ### build volview (node 19.7.0 for node-gpy)(v4.1.1)
