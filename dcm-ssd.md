@@ -111,9 +111,19 @@ user --request---> proxy
 - 使用带有用户名和密码的HTTP请求：当向Orthanc发送HTTP请求时，您需要在请求头中包含用户名和密码信息。这样，Orthanc才能验证请求的发送者身份
 - 基本身份验证不是最安全的身份验证方式，因为它会在每个请求中以明文方式传输用户名和密码。因此，在实际生产环境中，您可能需要使用更安全的身份验证方法，如TLS/SSL证书认证
 
-### Plugin(Data Cache)  
-[创建插件](https://orthanc.uclouvain.be/book/developers/creating-plugins.html)
-- 关于数据缓存谁用谁缓存，orthanc 只是数据存储系统，不承担业务功能，
+### Data Cache  
+- 关于数据缓存谁用谁缓存，orthanc 只是数据存储系统，不承担业务功能
+- 通过插件形式创建webserver，数据缓存到webserver上，由插件自己来维护缓存 [创建插件](https://orthanc.uclouvain.be/book/developers/creating-plugins.html)
+- 通过orthanc管理缓存
+  - 内置缓存系统：Orthanc具有内置的缓存系统，可以配置来缓存常用的医学影像数据，以加快数据的访问速度。这些缓存可以在内存中或者硬盘上进行。
+
+  - 插件支持：Orthanc具有丰富的插件系统，可以通过插件来扩展其功能。你可以编写自定义的插件来实现特定的缓存策略和管理功能。
+
+  - 缓存策略配置：Orthanc允许用户根据需求配置缓存策略，包括缓存大小、缓存淘汰策略等。这样可以根据具体情况来优化缓存的使用。
+
+  - 数据预加载：Orthanc可以预先加载一些数据到缓存中，以确保在需要时能够快速访问。这对于一些常用的影像数据特别有效。
+
+  - 分布式缓存：如果你有多个Orthanc实例，你可以设置一个分布式的缓存系统，将缓存数据在不同的实例之间共享，以提高整个系统的性能和可扩展性。
 
 ### Rest Api 
 Cheat sheet of the REST API [Rest Api 备忘清单](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html)
