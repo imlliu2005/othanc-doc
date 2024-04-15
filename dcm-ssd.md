@@ -8,7 +8,6 @@
 ### Orthanc 承载能力
 -  Orthanc 正在医院中用于生产，拥有超过 15TB 的数据、125,000 项研究和大约 5000 万个实例。其他用户甚至报告了超过 28TB 的数据
 
-
 ### Orthanc 通信协议支持
 - DICOM协议：DICOM（Digital Imaging and Communications in Medicine）是医学图像领域的标准通信协议。Orthanc作为DICOM服务器，可以与DICOM设备（如医疗成像设备、PACS系统等）进行通信，接收、存储和检索DICOM图像数据
 - RESTful API：Orthanc提供了基于HTTP的RESTful API，允许用户通过HTTP请求与Orthanc服务器进行通信。这使得用户可以通过编程方式执行各种操作，如上传图像、检索患者信息、查询图像等
@@ -28,7 +27,7 @@
 - 云部署(aws/阿里云...)
 - 本地部署(本地工作站...)
 
-### orthanc 分布式部署
+### orthanc 支持分布式部署
 
 ```mermaid
 graph TB
@@ -125,9 +124,58 @@ user --request---> proxy
 
   - 分布式缓存：如果你有多个Orthanc实例，你可以设置一个分布式的缓存系统，将缓存数据在不同的实例之间共享，以提高整个系统的性能和可扩展性。
 
+
+### Plugin Cache Study
+```mermaid
+    graph LR
+    
+    subgraph OsimisPlugin
+    c[cache data on disk]
+    end
+
+    subgraph StonePlugin
+        d[no cache on disk]
+        m[only cache data in memory for current data]
+    end
+
+```
+
+
+### 浏览器访问本地文件系统
+
+- File API: File API 允许 JavaScript 代码通过用户交互来读取本地文件。用户选择文件，然后通过 JavaScript 读取所选文件的内容。这种方式不需要使用 WebAssembly。
+
+- IndexedDB: IndexedDB 是浏览器中的一个客户端数据库，允许您存储大量结构化数据。您可以将文件内容存储在 IndexedDB 中，然后在需要时从中检索。这种方式同样不需要使用 WebAssembly。
+
+- 与服务器交互: 如果您需要访问本地文件系统并进行文件操作，您可以通过与服务器交互来实现。用户可以通过浏览器上传文件到服务器，服务器执行文件操作，然后将结果返回给浏览器。这种方式可能需要使用 WebAssembly 来执行一些复杂的文件操作，但文件访问仍然是在服务器端完成的
+
 ### Rest Api 
 Cheat sheet of the REST API [Rest Api 备忘清单](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html)
 Cheat sheet of the REST API [Rest Api](https://orthanc.uclouvain.be/api/index.html)
 
 ### Orthanc Book
 Welcome to the Orthanc Book [Orthanc Book Link](https://orthanc.uclouvain.be/book/index.html)
+
+
+### viewer 下载速度对比
+环境：orthanc + s3plugin
+访问方式：远程（非部署机器）
+
+osimis-viewr:
+有缓存
+下载数据大小：56.9M
+下载时间：5.63s
+
+无缓存
+下载数据大小：56.9M
+下载时间：11.86s
+
+stone-viewer 
+无缓存
+下载数据大小：197M
+下载时间：11.86s
+
+ohif-viewer
+无缓存
+下载数据大小：148M (dicom 132M js资源16M)
+下载时间：13.05s
