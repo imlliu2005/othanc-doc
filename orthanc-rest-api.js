@@ -8,13 +8,3 @@ curl http://localhost:8042/osimis-viewer/images/5a511cc1-a593f571-13107899-54eb2
 curl http://localhost:8042/instances/5a511cc1-a593f571-13107899-54eb2007-55927b66/preview > 1.png
 curl http://localhost:8042/instances/5a511cc1-a593f571-13107899-54eb2007-55927b66/image-uint16 > full-16.png  
 curl http://localhost:8042/instances/5a511cc1-a593f571-13107899-54eb2007-55927b66/image-uint8 > full-8.png  
-
-minio:
-
-GET /<bucketName>/<objectName> HTTP/1.1
-Host: <minioHost>
-Authorization: Bearer <AccessKey>:<Signature>
-
-GET /my-sample-bucket/00314771-e9e5-47c4-8e75-26160ee191a8.dcm HTTP/1.1
-Host: http://192.168.110.199:9001
-Authorization: Bearer minio:miniopwd

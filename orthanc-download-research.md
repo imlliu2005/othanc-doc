@@ -4,6 +4,7 @@
 - 是否启用s3 Plugin viewer dicom数据下载速度对比
 - 环境：orthanc + s3plugin
 - 访问方式：远程（非部署机器）
+- 总结 不同viewer访问同样的数据因为各自不同的处理方式可以看出osimis 的效果更好一些
 
 ```mermaid
     graph TB
@@ -162,6 +163,8 @@
     数据量：132M
     下载时间：0.646s
 
+- 总结：三种方式差别不大
+
 ```mermaid
     graph LR
     subgraph only-access-minio-local
@@ -192,6 +195,8 @@
 - 用js调用s3 api 去下载dicom 求时间
     数据量：132M
     下载时间：11.965s
+
+- 总结：三种方式差别不大
 
 ```mermaid
     graph LR
@@ -225,6 +230,8 @@
     数据量：132M
     下载时间：0.395s
 
+- 总结：三种方式差别不大
+
 ```mermaid
     graph LR
     subgraph only-access-old-minio-local
@@ -256,6 +263,8 @@
     数据量：132M
     下载时间：12.069s
 
+- 总结：三种方式差别不大
+
 ```mermaid
     graph LR
     subgraph only-access-old-minio-remote
@@ -278,6 +287,7 @@
 - 是否启用s3 Plugin viewer dicom数据下载速度对比
 - 环境：orthanc + s3plugin
 - 访问方式：远程（非部署机器）
+- 总结 不同viewer访问同样的数据因为各自不同的处理方式科亚看出osimis 的效果更好一些
 
 ```mermaid
     graph TB

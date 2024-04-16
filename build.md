@@ -9,6 +9,12 @@ cd ~/dev/build/orthanc
 cmake -DCMAKE_BUILD_TYPE=Release  -DSTATIC_BUILD=ON ../../orthanc/OrthancServer
 make
 
+### windows build orthanc
+ cmake -G "Visual Studio 16 2019" -A x64 -T host=x64 -DSTATIC_BUILD=ON -DBOOST_LOCALE_BACKEND=icu -DMSVC_MULTIPLE_PROCESSES=ON -DSTATIC_BUILD=ON -DOPENSSL_NO_CAPIENG=ON -DALLOW_DOWNLOADS=ON [...]\OrthancServer
+
+ 或者 
+
+ cmake -G "Visual Studio 16 2019" -A x64 -DMSVC_MULTIPLE_PROCESSES=ON -DSTATIC_BUILD=ON -DOPENSSL_NO_CAPIENG=ON -DALLOW_DOWNLOADS=ON [...]\OrthancServer
 
 ### osimis-webviewer
 ### frontend
